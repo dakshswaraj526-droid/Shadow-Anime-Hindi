@@ -1,1 +1,508 @@
-<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin</title><style>body{background:#08080d;color:white;font-family:Arial;padding:25px}.box{max-width:650px;margin:auto;background:#12121b;padding:25px;border-radius:15px}input,textarea{width:100%;box-sizing:border-box;padding:12px;margin:8px 0 14px;background:#090910;color:white;border:1px solid #333;border-radius:8px}button{padding:12px 18px;border:0;border-radius:8px;background:#8b4dff;color:white;font-weight:bold}.danger{background:#b33}.hidden{display:none}.item{border:1px solid #333;padding:15px;margin:12px 0;border-radius:9px}</style></head><body><div class="box"><h1>🔐 Admin Panel</h1><div id="login"><input id="pw" type="password" placeholder="Admin password"><button onclick="login()">Login</button></div><div id="dash" class="hidden"><h2>Add a game</h2><input id="name" placeholder="Game name"><textarea id="desc" placeholder="Short description"></textarea><input id="url" placeholder="Official/legal game link (https://...)"><button onclick="add()">Add Game</button><h2>Games</h2><div id="list"></div></div></div><script>const PASSWORD='CHANGE_THIS_PASSWORD';function login(){if(pw.value===PASSWORD){login.style.display='none';dash.classList.remove('hidden');render()}else alert('Wrong password')}function get(){return JSON.parse(localStorage.getItem('sah_games')||'[]')}function add(){if(!name.value||!url.value)return alert('Enter name and link');if(!/^https?:\\/\\//i.test(url.value))return alert('Use https://');let a=get();a.push({name:name.value,description:desc.value,url:url.value});localStorage.setItem('sah_games',JSON.stringify(a));name.value=desc.value=url.value='';render()}function del(i){let a=get();a.splice(i,1);localStorage.setItem('sah_games',JSON.stringify(a));render()}function render(){let a=get();list.innerHTML=a.map((g,i)=>`<div class="item"><b>${g.name}</b><br>${g.url}<br><button class="danger" onclick="del(${i})">Delete</button></div>`).join('')||'<p>No games added.</p>'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shadow Anime Hindi - Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #08080d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .box {
+      background: #12121b;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 14px;
+      background: #090910;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .danger {
+      background: #dc2626;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .item {
+      background: #090910;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 12px;
+    }
+
+    .game-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .game-url {
+      color: #aaa;
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
+
+    <h1>🔐 Admin Panel</h1>
+
+    <p>Enter your admin password.</p>
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Admin password"
+      autocomplete="current-password"
+    >
+
+    <button id="loginButton">Login</button>
+
+    <div id="loginMessage" class="message"></div>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div class="box hidden" id="dashboard">
+
+    <h1>🎮 Admin Dashboard</h1>
+
+    <h2>Add a Game</h2>
+
+    <label>Game Name</label>
+
+    <input
+      id="gameName"
+      type="text"
+      placeholder="Example: Shadow Fight"
+    >
+
+    <label>Description</label>
+
+    <textarea
+      id="gameDescription"
+      placeholder="Short description of the game"
+    ></textarea>
+
+    <label>Game URL</label>
+
+    <input
+      id="gameUrl"
+      type="url"
+      placeholder="https://example.com/game"
+    >
+
+    <button id="addGameButton">Add Game</button>
+
+    <div id="addMessage" class="message"></div>
+
+  </div>
+
+
+  <!-- GAME LIST -->
+  <div class="box hidden" id="gamesBox">
+
+    <h2>📋 Games</h2>
+
+    <div id="gameList"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /*
+   * ================================
+   * ADMIN SETTINGS
+   * ================================
+   *
+   * Change the password below.
+   *
+   * IMPORTANT:
+   * This is NOT a secure server-side password.
+   * Anyone who can inspect this public HTML can see it.
+   */
+
+  const ADMIN_PASSWORD = "CHANGE_THIS_PASSWORD";
+
+
+  /*
+   * ================================
+   * ELEMENTS
+   * ================================
+   */
+
+  const loginBox = document.getElementById("loginBox");
+  const dashboard = document.getElementById("dashboard");
+  const gamesBox = document.getElementById("gamesBox");
+
+  const passwordInput = document.getElementById("passwordInput");
+  const loginButton = document.getElementById("loginButton");
+  const loginMessage = document.getElementById("loginMessage");
+
+  const gameName = document.getElementById("gameName");
+  const gameDescription = document.getElementById("gameDescription");
+  const gameUrl = document.getElementById("gameUrl");
+
+  const addGameButton = document.getElementById("addGameButton");
+  const addMessage = document.getElementById("addMessage");
+
+  const gameList = document.getElementById("gameList");
+
+
+  /*
+   * ================================
+   * STORAGE
+   * ================================
+   */
+
+  const STORAGE_KEY = "sah_games";
+
+
+  function getGames() {
+
+    try {
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        return [];
+      }
+
+      const games = JSON.parse(saved);
+
+      return Array.isArray(games) ? games : [];
+
+    } catch (error) {
+
+      console.error("Could not read games:", error);
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveGames(games) {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(games)
+    );
+
+  }
+
+
+  /*
+   * ================================
+   * LOGIN
+   * ================================
+   */
+
+  function login() {
+
+    const password = passwordInput.value;
+
+    if (password === ADMIN_PASSWORD) {
+
+      loginBox.classList.add("hidden");
+
+      dashboard.classList.remove("hidden");
+
+      gamesBox.classList.remove("hidden");
+
+      loginMessage.textContent = "";
+
+      renderGames();
+
+    } else {
+
+      loginMessage.textContent = "❌ Wrong password.";
+
+      passwordInput.value = "";
+
+      passwordInput.focus();
+
+    }
+
+  }
+
+
+  loginButton.addEventListener("click", login);
+
+
+  passwordInput.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+      login();
+    }
+
+  });
+
+
+  /*
+   * ================================
+   * ADD GAME
+   * ================================
+   */
+
+  function addGame() {
+
+    const name = gameName.value.trim();
+
+    const description = gameDescription.value.trim();
+
+    const url = gameUrl.value.trim();
+
+
+    if (!name || !url) {
+
+      addMessage.textContent =
+        "❌ Please enter both the game name and URL.";
+
+      return;
+
+    }
+
+
+    if (!/^https?:\/\//i.test(url)) {
+
+      addMessage.textContent =
+        "❌ URL must start with https:// or http://";
+
+      return;
+
+    }
+
+
+    const games = getGames();
+
+
+    const newGame = {
+
+      id: Date.now(),
+
+      name: name,
+
+      desc: description,
+
+      url: url
+
+    };
+
+
+    games.push(newGame);
+
+    saveGames(games);
+
+
+    gameName.value = "";
+
+    gameDescription.value = "";
+
+    gameUrl.value = "";
+
+
+    addMessage.textContent =
+      "✅ Game added successfully!";
+
+
+    renderGames();
+
+  }
+
+
+  addGameButton.addEventListener("click", addGame);
+
+
+  /*
+   * ================================
+   * DELETE GAME
+   * ================================
+   */
+
+  function deleteGame(index) {
+
+    const games = getGames();
+
+    if (index < 0 || index >= games.length) {
+      return;
+    }
+
+
+    const game = games[index];
+
+
+    const confirmed = confirm(
+      'Delete "' + game.name + '"?'
+    );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    games.splice(index, 1);
+
+    saveGames(games);
+
+    renderGames();
+
+  }
+
+
+  /*
+   * ================================
+   * DISPLAY GAMES
+   * ================================
+   */
+
+  function renderGames() {
+
+    const games = getGames();
+
+
+    if (games.length === 0) {
+
+      gameList.innerHTML =
+        "<p>No games added yet.</p>";
+
+      return;
+
+    }
+
+
+    gameList.innerHTML = "";
+
+
+    games.forEach(function(game, index) {
+
+      const item = document.createElement("div");
+
+      item.className = "item";
+
+
+      const name = document.createElement("div");
+
+      name.className = "game-name";
+
+      name.textContent = game.name;
+
+
+      const description = document.createElement("div");
+
+      description.textContent =
+        game.desc || "No description";
+
+
+      const url = document.createElement("div");
+
+      url.className = "game-url";
+
+      url.textContent = game.url;
+
+
+      const deleteButton =
+        document.createElement("button");
+
+      deleteButton.className = "danger";
+
+      deleteButton.textContent = "Delete";
+
+
+      deleteButton.addEventListener(
+        "click",
+        function() {
+          deleteGame(index);
+        }
+      );
+
+
+      item.appendChild(name);
+
+      item.appendChild(description);
+
+      item.appendChild(url);
+
+      item.appendChild(deleteButton);
+
+
+      gameList.appendChild(item);
+
+    });
+
+  }
+
+</script>
+
+</body>
+</html>

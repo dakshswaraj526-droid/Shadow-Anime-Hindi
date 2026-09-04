@@ -119,6 +119,7 @@ h1 {
     gap: 25px;
 }
 
+/* GAME CARD */
 .game-card {
     background: #10101a;
     border: 1px solid #262638;
@@ -137,6 +138,7 @@ h1 {
     width: 100%;
     height: 190px;
     object-fit: cover;
+    display: block;
 }
 
 .game-info {
@@ -161,10 +163,22 @@ h1 {
     text-decoration: none;
     border-radius: 6px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .card-btn:hover {
     background: #a855f7;
+    transform: translateY(-2px);
+}
+
+/* NO GAMES */
+.no-games {
+    background: #10101a;
+    border: 1px solid #262638;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    color: #888;
 }
 
 /* FOOTER */
@@ -204,6 +218,8 @@ footer {
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
     <div class="logo">
@@ -219,11 +235,15 @@ footer {
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
     <div class="hero-text">
 
-        <div class="tag">WELCOME TO THE SHADOW</div>
+        <div class="tag">
+            WELCOME TO THE SHADOW
+        </div>
 
         <h1>
             ENTER THE<br>
@@ -244,76 +264,228 @@ footer {
 </section>
 
 
+<!-- GAMES -->
+
 <section class="games" id="games">
 
     <h2 class="section-title">
         🎮 Featured Games
     </h2>
 
-    <div class="game-grid">
+    <!-- Games added from Admin Panel appear here -->
 
-
-        <!-- GAME 1 -->
-
-        <div class="game-card">
-
-            <img src="game.jpg" alt="Game Thumbnail">
-
-            <div class="game-info">
-
-                <h2>Shadow Anime Game</h2>
-
-                <p>
-                    Enter the world of anime and experience
-                    an exciting gaming adventure.
-                </p>
-
-                <a
-                    href="YOUR-GAME-LINK-HERE"
-                    target="_blank"
-                    class="card-btn">
-                    PLAY NOW →
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- GAME 2 -->
-
-        <div class="game-card">
-
-            <img src="game2.jpg" alt="Game Thumbnail">
-
-            <div class="game-info">
-
-                <h2>Coming Soon</h2>
-
-                <p>
-                    A new adventure is coming to Shadow Anime.
-                    Stay tuned for updates.
-                </p>
-
-                <a href="#" class="card-btn">
-                    COMING SOON
-                </a>
-
-            </div>
-
-        </div>
-
+    <div class="game-grid" id="gameGrid">
 
     </div>
 
 </section>
 
 
+<!-- FOOTER -->
+
 <footer>
 
     © 2026 Shadow Anime Hindi • All Rights Reserved
 
 </footer>
+
+
+<script>
+
+/*
+========================================
+LOAD GAMES FROM ADMIN PANEL
+========================================
+*/
+
+const STORAGE_KEY = "sah_games";
+
+const gameGrid =
+    document.getElementById("gameGrid");
+
+
+function getGames() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(STORAGE_KEY);
+
+        if (!saved) {
+
+            return [];
+
+        }
+
+        const games =
+            JSON.parse(saved);
+
+        return Array.isArray(games)
+            ? games
+            : [];
+
+    } catch (error) {
+
+        console.error(
+            "Could not load games:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/*
+========================================
+DISPLAY GAMES
+========================================
+*/
+
+function displayGames() {
+
+    const games =
+        getGames();
+
+
+    gameGrid.innerHTML = "";
+
+
+    /*
+    NO GAMES
+    */
+
+    if (games.length === 0) {
+
+        gameGrid.innerHTML = `
+            <div class="no-games">
+                🎮 No games available yet.
+                <br><br>
+                Check back soon!
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    CREATE GAME CARDS
+    */
+
+    games.forEach(function(game) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "game-card";
+
+
+        /*
+        IMAGE
+        */
+
+        const image =
+            document.createElement("img");
+
+        image.src =
+            game.image;
+
+        image.alt =
+            game.name;
+
+
+        /*
+        INFO CONTAINER
+        */
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "game-info";
+
+
+        /*
+        GAME NAME
+        */
+
+        const title =
+            document.createElement("h2");
+
+        title.textContent =
+            game.name;
+
+
+        /*
+        DESCRIPTION
+        */
+
+        const description =
+            document.createElement("p");
+
+        description.textContent =
+            game.desc ||
+            "Experience an amazing gaming adventure.";
+
+
+        /*
+        PLAY BUTTON
+        */
+
+        const button =
+            document.createElement("a");
+
+        button.className =
+            "card-btn";
+
+        button.textContent =
+            "PLAY NOW →";
+
+        button.href =
+            game.url;
+
+        button.target =
+            "_blank";
+
+        button.rel =
+            "noopener noreferrer";
+
+
+        /*
+        BUILD CARD
+        */
+
+        info.appendChild(title);
+
+        info.appendChild(description);
+
+        info.appendChild(button);
+
+        card.appendChild(image);
+
+        card.appendChild(info);
+
+        gameGrid.appendChild(card);
+
+    });
+
+}
+
+
+/*
+========================================
+START
+========================================
+*/
+
+displayGames();
+
+</script>
 
 </body>
 </html>

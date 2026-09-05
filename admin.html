@@ -55,11 +55,6 @@ textarea {
     font-size: 15px;
 }
 
-input[type="file"] {
-    padding: 10px;
-    cursor: pointer;
-}
-
 textarea {
     min-height: 100px;
     resize: vertical;
@@ -253,19 +248,18 @@ hr {
     >
 
 
-    <!-- IMAGE -->
+    <!-- IMAGE URL -->
 
-    <label>Game Thumbnail</label>
+    <label>Game Thumbnail URL</label>
 
     <input
-        id="gameImage"
-        type="file"
-        accept="image/png,image/jpeg,image/webp"
+        id="gameImageUrl"
+        type="url"
+        placeholder="https://example.com/image.jpg"
     >
 
     <p class="info">
-        Maximum image size: 2 MB.
-        Images are automatically resized before uploading.
+        Paste a direct image URL ending in .jpg, .jpeg, .png or .webp.
     </p>
 
 
@@ -333,15 +327,6 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL,
-    deleteObject
-}
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
-
 
 // ========================================
 // YOUR FIREBASE CONFIGURATION
@@ -381,8 +366,6 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-const storage = getStorage(app);
-
 
 // ========================================
 // ELEMENTS
@@ -421,8 +404,8 @@ const gameDescription =
 const gameUrl =
     document.getElementById("gameUrl");
 
-const gameImage =
-    document.getElementById("gameImage");
+const gameImageUrl =
+    document.getElementById("gameImageUrl");
 
 const imagePreview =
     document.getElementById("imagePreview");
@@ -441,47 +424,42 @@ const gameList =
 // IMAGE PREVIEW
 // ========================================
 
-gameImage.addEventListener("change", function() {
+gameImageUrl.addEventListener(
+    "input",
+    function() {
 
-    const file = gameImage.files[0];
+        const url =
+            gameImageUrl.value.trim();
 
-    if (!file) {
+        if (!url) {
 
-        imagePreview.style.display = "none";
+            imagePreview.style.display =
+                "none";
 
-        imagePreview.src = "";
+            imagePreview.src = "";
 
-        return;
-    }
+            return;
+        }
 
-
-    if (file.size > 2 * 1024 * 1024) {
-
-        addMessage.textContent =
-            "❌ Image must be smaller than 2 MB.";
-
-        gameImage.value = "";
-
-        imagePreview.style.display = "none";
-
-        return;
-    }
-
-
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-
-        imagePreview.src =
-            event.target.result;
+        imagePreview.src = url;
 
         imagePreview.style.display =
             "block";
-    };
+    }
+);
 
-    reader.readAsDataURL(file);
 
-});
+// If image URL fails
+
+imagePreview.addEventListener(
+    "error",
+    function() {
+
+        imagePreview.style.display =
+            "none";
+
+    }
+);
 
 
 // ========================================
@@ -685,8 +663,8 @@ async function addGame() {
     const url =
         gameUrl.value.trim();
 
-    const imageFile =
-        gameImage.files[0];
+    const imageUrl =
+        gameImageUrl.value.trim();
 
 
     // CHECK NAME
@@ -700,7 +678,7 @@ async function addGame() {
     }
 
 
-    // CHECK URL
+    // CHECK GAME URL
 
     if (!url) {
 
@@ -714,27 +692,27 @@ async function addGame() {
     if (!/^https?:\/\//i.test(url)) {
 
         addMessage.textContent =
-            "❌ URL must start with http:// or https://";
+            "❌ Game URL must start with http:// or https://";
 
         return;
     }
 
 
-    // CHECK IMAGE
+    // CHECK IMAGE URL
 
-    if (!imageFile) {
+    if (!imageUrl) {
 
         addMessage.textContent =
-            "❌ Please select a game thumbnail.";
+            "❌ Please enter the thumbnail URL.";
 
         return;
     }
 
 
-    if (imageFile.size > 2 * 1024 * 1024) {
+    if (!/^https?:\/\//i.test(imageUrl)) {
 
         addMessage.textContent =
-            "❌ Image must be smaller than 2 MB.";
+            "❌ Thumbnail URL must start with http:// or https://";
 
         return;
     }
@@ -743,7 +721,7 @@ async function addGame() {
     addGameButton.disabled = true;
 
     addMessage.textContent =
-        "⏳ Uploading image...";
+        "⏳ Saving game...";
 
 
     try {
@@ -759,61 +737,6 @@ async function addGame() {
             );
 
         }
-
-
-        // =================================
-        // CREATE UNIQUE FILE NAME
-        // =================================
-
-        const extension =
-            imageFile.name
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-        const fileName =
-            Date.now() +
-            "_" +
-            Math.random()
-                .toString(36)
-                .substring(2) +
-            "." +
-            extension;
-
-
-        const imagePath =
-            "game-covers/" +
-            user.uid +
-            "/" +
-            fileName;
-
-
-        // =================================
-        // UPLOAD IMAGE
-        // =================================
-
-        const storageRef =
-            ref(storage, imagePath);
-
-
-        await uploadBytes(
-            storageRef,
-            imageFile
-        );
-
-
-        // =================================
-        // GET IMAGE URL
-        // =================================
-
-        const imageUrl =
-            await getDownloadURL(
-                storageRef
-            );
-
-
-        addMessage.textContent =
-            "⏳ Saving game...";
 
 
         // =================================
@@ -834,9 +757,6 @@ async function addGame() {
                 imageUrl:
                     imageUrl,
 
-                imagePath:
-                    imagePath,
-
                 createdAt:
                     Date.now(),
 
@@ -856,11 +776,12 @@ async function addGame() {
 
         gameUrl.value = "";
 
-        gameImage.value = "";
+        gameImageUrl.value = "";
 
         imagePreview.src = "";
 
-        imagePreview.style.display = "none";
+        imagePreview.style.display =
+            "none";
 
 
         addMessage.textContent =
@@ -898,8 +819,7 @@ addGameButton.addEventListener(
 
 async function deleteGame(
     gameId,
-    gameNameText,
-    imagePath
+    gameNameText
 ) {
 
     const confirmed =
@@ -917,35 +837,9 @@ async function deleteGame(
 
     try {
 
-        // Delete image from Storage
-
-        if (imagePath) {
-
-            try {
-
-                const imageRef =
-                    ref(
-                        storage,
-                        imagePath
-                    );
-
-                await deleteObject(
-                    imageRef
-                );
-
-            } catch (imageError) {
-
-                console.log(
-                    "Image deletion skipped:",
-                    imageError
-                );
-
-            }
-
-        }
-
-
-        // Delete Firestore document
+        // =================================
+        // DELETE FIRESTORE DOCUMENT ONLY
+        // =================================
 
         await deleteDoc(
             doc(
@@ -1074,7 +968,8 @@ async function renderGames() {
                     "game-name";
 
                 name.textContent =
-                    game.name || "Unnamed game";
+                    game.name ||
+                    "Unnamed game";
 
 
                 // =================================
@@ -1132,8 +1027,7 @@ async function renderGames() {
 
                         deleteGame(
                             id,
-                            game.name,
-                            game.imagePath
+                            game.name
                         );
 
                     }

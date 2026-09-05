@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Shadow Anime Gaming</title>
 
+
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +26,9 @@ body {
     color: white;
 }
 
+
 /* HEADER */
+
 header {
     height: 75px;
     background: #0d0d16;
@@ -51,15 +60,27 @@ nav a:hover {
     color: #a855f7;
 }
 
+
 /* HERO */
+
 .hero {
     min-height: 430px;
     display: flex;
     align-items: center;
     padding: 60px 8%;
+
     background:
-        radial-gradient(circle at 80% 50%, #581c87 0%, transparent 35%),
-        linear-gradient(90deg, #07070d, #11101c);
+        radial-gradient(
+            circle at 80% 50%,
+            #581c87 0%,
+            transparent 35%
+        ),
+
+        linear-gradient(
+            90deg,
+            #07070d,
+            #11101c
+        );
 }
 
 .hero-text {
@@ -88,22 +109,40 @@ h1 {
 
 .play-btn {
     display: inline-block;
-    background: linear-gradient(90deg, #7c3aed, #a855f7);
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #a855f7
+        );
+
     color: white;
+
     padding: 15px 35px;
+
     border-radius: 8px;
+
     text-decoration: none;
+
     font-weight: bold;
-    box-shadow: 0 0 25px #7c3aed66;
+
+    box-shadow:
+        0 0 25px #7c3aed66;
+
     transition: 0.3s;
 }
 
 .play-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 35px #a855f7aa;
+
+    box-shadow:
+        0 0 35px #a855f7aa;
 }
 
+
 /* GAMES */
+
 .games {
     padding: 60px 8%;
 }
@@ -115,29 +154,47 @@ h1 {
 
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
     gap: 25px;
 }
 
+
 /* GAME CARD */
+
 .game-card {
     background: #10101a;
+
     border: 1px solid #262638;
+
     border-radius: 14px;
+
     overflow: hidden;
+
     transition: 0.3s;
 }
 
 .game-card:hover {
     transform: translateY(-8px);
+
     border-color: #a855f7;
-    box-shadow: 0 10px 35px #000;
+
+    box-shadow:
+        0 10px 35px #000;
 }
 
 .game-card img {
     width: 100%;
+
     height: 190px;
+
     object-fit: cover;
+
     display: block;
 }
 
@@ -151,46 +208,89 @@ h1 {
 
 .game-info p {
     color: #999;
+
     line-height: 1.5;
+
     margin-bottom: 18px;
 }
 
 .card-btn {
     display: inline-block;
+
     padding: 10px 20px;
+
     background: #7c3aed;
+
     color: white;
+
     text-decoration: none;
+
     border-radius: 6px;
+
     font-weight: bold;
+
     transition: 0.3s;
 }
 
 .card-btn:hover {
     background: #a855f7;
+
     transform: translateY(-2px);
 }
 
+
 /* NO GAMES */
+
 .no-games {
     background: #10101a;
+
     border: 1px solid #262638;
+
     padding: 35px;
+
     border-radius: 12px;
+
     text-align: center;
+
     color: #888;
 }
 
-/* FOOTER */
-footer {
+
+/* LOADING */
+
+.loading {
+    background: #10101a;
+
+    border: 1px solid #262638;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
     text-align: center;
-    padding: 30px;
-    background: #0b0b12;
-    color: #666;
-    border-top: 1px solid #20202d;
+
+    color: #888;
 }
 
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    background: #0b0b12;
+
+    color: #666;
+
+    border-top:
+        1px solid #20202d;
+}
+
+
 /* MOBILE */
+
 @media(max-width: 700px) {
 
     header {
@@ -212,11 +312,16 @@ footer {
     .games {
         padding: 45px 6%;
     }
+
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <!-- HEADER -->
 
@@ -227,9 +332,19 @@ footer {
     </div>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#games">Games</a>
-        <a href="#">About</a>
+
+        <a href="#">
+            Home
+        </a>
+
+        <a href="#games">
+            Games
+        </a>
+
+        <a href="#">
+            About
+        </a>
+
     </nav>
 
 </header>
@@ -251,11 +366,15 @@ footer {
         </h1>
 
         <p>
-            Discover and play amazing games from the Shadow Anime
-            gaming universe. Choose your game and start playing now.
+            Discover and play amazing games from
+            the Shadow Anime gaming universe.
+            Choose your game and start playing now.
         </p>
 
-        <a href="#games" class="play-btn">
+        <a
+            href="#games"
+            class="play-btn"
+        >
             🎮 EXPLORE GAMES
         </a>
 
@@ -266,15 +385,23 @@ footer {
 
 <!-- GAMES -->
 
-<section class="games" id="games">
+<section
+    class="games"
+    id="games"
+>
 
     <h2 class="section-title">
         🎮 Featured Games
     </h2>
 
-    <!-- Games added from Admin Panel appear here -->
+    <div
+        class="game-grid"
+        id="gameGrid"
+    >
 
-    <div class="game-grid" id="gameGrid">
+        <div class="loading">
+            ⏳ Loading games...
+        </div>
 
     </div>
 
@@ -290,39 +417,283 @@ footer {
 </footer>
 
 
-<script>
+<script type="module">
+
 
 /*
-========================================
-LOAD GAMES FROM ADMIN PANEL
-========================================
+====================================================
+FIREBASE CONFIG
+====================================================
+
+PASTE THE SAME FIREBASE CONFIG HERE
+THAT YOU USED IN admin.html.
+====================================================
 */
 
-const STORAGE_KEY = "sah_games";
+const firebaseConfig = {
+
+    apiKey:
+        "PASTE_YOUR_API_KEY_HERE",
+
+    authDomain:
+        "PASTE_YOUR_AUTH_DOMAIN_HERE",
+
+    projectId:
+        "PASTE_YOUR_PROJECT_ID_HERE",
+
+    storageBucket:
+        "PASTE_YOUR_STORAGE_BUCKET_HERE",
+
+    messagingSenderId:
+        "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
+
+    appId:
+        "PASTE_YOUR_APP_ID_HERE"
+
+};
+
+
+/*
+====================================================
+FIREBASE IMPORTS
+====================================================
+*/
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/*
+====================================================
+INITIALIZE FIREBASE
+====================================================
+*/
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/*
+====================================================
+GAME GRID
+====================================================
+*/
 
 const gameGrid =
     document.getElementById("gameGrid");
 
 
-function getGames() {
+/*
+====================================================
+LOAD GAMES
+====================================================
+*/
+
+async function getGames() {
+
+    const snapshot =
+        await getDocs(
+            collection(db, "games")
+        );
+
+    const games =
+        snapshot.docs.map(
+            function(item) {
+
+                return {
+                    id: item.id,
+                    ...item.data()
+                };
+
+            }
+        );
+
+
+    /*
+     * Newest games first
+     */
+
+    games.sort(
+        function(a, b) {
+
+            return (
+                (b.createdAt || 0) -
+                (a.createdAt || 0)
+            );
+
+        }
+    );
+
+
+    return games;
+
+}
+
+
+/*
+====================================================
+DISPLAY GAMES
+====================================================
+*/
+
+async function displayGames() {
 
     try {
 
-        const saved =
-            localStorage.getItem(STORAGE_KEY);
+        const games =
+            await getGames();
 
-        if (!saved) {
 
-            return [];
+        gameGrid.innerHTML = "";
+
+
+        /*
+         * NO GAMES
+         */
+
+        if (games.length === 0) {
+
+            gameGrid.innerHTML = `
+
+                <div class="no-games">
+
+                    🎮 No games available yet.
+
+                    <br><br>
+
+                    Check back soon!
+
+                </div>
+
+            `;
+
+            return;
 
         }
 
-        const games =
-            JSON.parse(saved);
 
-        return Array.isArray(games)
-            ? games
-            : [];
+        /*
+         * CREATE GAME CARDS
+         */
+
+        games.forEach(
+            function(game) {
+
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "game-card";
+
+
+                /*
+                 * IMAGE
+                 */
+
+                if (game.image) {
+
+                    const image =
+                        document.createElement("img");
+
+                    image.src =
+                        game.image;
+
+                    image.alt =
+                        game.name;
+
+                    image.loading =
+                        "lazy";
+
+                    card.appendChild(image);
+
+                }
+
+
+                /*
+                 * INFO
+                 */
+
+                const info =
+                    document.createElement("div");
+
+                info.className =
+                    "game-info";
+
+
+                /*
+                 * TITLE
+                 */
+
+                const title =
+                    document.createElement("h2");
+
+                title.textContent =
+                    game.name;
+
+
+                /*
+                 * DESCRIPTION
+                 */
+
+                const description =
+                    document.createElement("p");
+
+                description.textContent =
+                    game.desc ||
+                    "Experience an amazing gaming adventure.";
+
+
+                /*
+                 * PLAY BUTTON
+                 */
+
+                const button =
+                    document.createElement("a");
+
+                button.className =
+                    "card-btn";
+
+                button.textContent =
+                    "PLAY NOW →";
+
+                button.href =
+                    game.url;
+
+                button.target =
+                    "_blank";
+
+                button.rel =
+                    "noopener noreferrer";
+
+
+                /*
+                 * BUILD CARD
+                 */
+
+                info.appendChild(title);
+
+                info.appendChild(description);
+
+                info.appendChild(button);
+
+                card.appendChild(info);
+
+                gameGrid.appendChild(card);
+
+            }
+        );
+
 
     } catch (error) {
 
@@ -331,156 +702,30 @@ function getGames() {
             error
         );
 
-        return [];
-
-    }
-
-}
-
-
-/*
-========================================
-DISPLAY GAMES
-========================================
-*/
-
-function displayGames() {
-
-    const games =
-        getGames();
-
-
-    gameGrid.innerHTML = "";
-
-
-    /*
-    NO GAMES
-    */
-
-    if (games.length === 0) {
 
         gameGrid.innerHTML = `
+
             <div class="no-games">
-                🎮 No games available yet.
+
+                ❌ Could not load games.
+
                 <br><br>
-                Check back soon!
+
+                Please try again later.
+
             </div>
+
         `;
 
-        return;
-
     }
-
-
-    /*
-    CREATE GAME CARDS
-    */
-
-    games.forEach(function(game) {
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "game-card";
-
-
-        /*
-        IMAGE
-        */
-
-        const image =
-            document.createElement("img");
-
-        image.src =
-            game.image;
-
-        image.alt =
-            game.name;
-
-
-        /*
-        INFO CONTAINER
-        */
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "game-info";
-
-
-        /*
-        GAME NAME
-        */
-
-        const title =
-            document.createElement("h2");
-
-        title.textContent =
-            game.name;
-
-
-        /*
-        DESCRIPTION
-        */
-
-        const description =
-            document.createElement("p");
-
-        description.textContent =
-            game.desc ||
-            "Experience an amazing gaming adventure.";
-
-
-        /*
-        PLAY BUTTON
-        */
-
-        const button =
-            document.createElement("a");
-
-        button.className =
-            "card-btn";
-
-        button.textContent =
-            "PLAY NOW →";
-
-        button.href =
-            game.url;
-
-        button.target =
-            "_blank";
-
-        button.rel =
-            "noopener noreferrer";
-
-
-        /*
-        BUILD CARD
-        */
-
-        info.appendChild(title);
-
-        info.appendChild(description);
-
-        info.appendChild(button);
-
-        card.appendChild(image);
-
-        card.appendChild(info);
-
-        gameGrid.appendChild(card);
-
-    });
 
 }
 
 
 /*
-========================================
+====================================================
 START
-========================================
+====================================================
 */
 
 displayGames();

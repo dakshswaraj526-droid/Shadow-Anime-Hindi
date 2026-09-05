@@ -1,199 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shadow Anime Hindi - Admin</title>
+<title>Shadow Anime Hindi - Admin</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      padding: 20px;
-      background: #08080d;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
+body {
+    margin: 0;
+    padding: 20px;
+    background: #08080d;
+    color: white;
+    font-family: Arial, sans-serif;
+}
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-    }
+.container {
+    max-width: 700px;
+    margin: auto;
+}
 
-    .box {
-      background: #12121b;
-      padding: 25px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      border: 1px solid #242432;
-    }
+.box {
+    background: #12121b;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #242432;
+}
 
-    h1, h2 {
-      margin-top: 0;
-    }
+h1, h2 {
+    margin-top: 0;
+}
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px;
-      background: #090910;
-      color: white;
-      border: 1px solid #333;
-      border-radius: 8px;
-      font-size: 15px;
-    }
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    background: #090910;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 15px;
+}
 
-    input[type="file"] {
-      padding: 10px;
-      cursor: pointer;
-    }
+input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+}
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
 
-    button {
-      padding: 12px 18px;
-      border: 0;
-      border-radius: 8px;
-      background: #8b5cf6;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 15px;
-    }
+button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #8b5cf6;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
 
-    button:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
 
-    .danger {
-      background: #dc2626;
-    }
+.danger {
+    background: #dc2626;
+}
 
-    .hidden {
-      display: none;
-    }
+.logout {
+    background: #333;
+    margin-left: 8px;
+}
 
-    .item {
-      background: #090910;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 12px;
-    }
+.hidden {
+    display: none;
+}
 
-    .game-image {
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      display: block;
-    }
+.item {
+    background: #090910;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 12px;
+}
 
-    .game-name {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+.game-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block;
+}
 
-    .game-description {
-      color: #bbb;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
+.game-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
 
-    .game-url {
-      color: #aaa;
-      word-break: break-all;
-      margin-bottom: 12px;
-    }
+.game-description {
+    color: #bbb;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
 
-    .message {
-      margin-top: 12px;
-      font-weight: bold;
-    }
+.game-url {
+    color: #aaa;
+    word-break: break-all;
+    margin-bottom: 12px;
+}
 
-    .image-preview {
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin: 5px 0 15px;
-      display: none;
-    }
+.message {
+    margin-top: 12px;
+    font-weight: bold;
+}
 
-    .logout {
-      background: #333;
-      margin-left: 8px;
-    }
+.image-preview {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 5px 0 15px;
+    display: none;
+}
 
-    .info {
-      color: #888;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-  </style>
+.info {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.5;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div class="box" id="loginBox">
+<!-- LOGIN -->
+<div class="box" id="loginBox">
 
     <h1>🔐 Admin Panel</h1>
 
-    <p>Enter your admin password.</p>
+    <p>Login with your Firebase admin account.</p>
+
+    <label>Email</label>
 
     <input
-      id="passwordInput"
-      type="password"
-      placeholder="Admin password"
-      autocomplete="current-password"
+        id="emailInput"
+        type="email"
+        placeholder="Admin email"
+        autocomplete="username"
     >
 
-    <button id="loginButton">Login</button>
+    <label>Password</label>
+
+    <input
+        id="passwordInput"
+        type="password"
+        placeholder="Admin password"
+        autocomplete="current-password"
+    >
+
+    <button id="loginButton">
+        Login
+    </button>
 
     <div id="loginMessage" class="message"></div>
 
-  </div>
+</div>
 
 
-  <!-- DASHBOARD -->
-  <div class="box hidden" id="dashboard">
+<!-- DASHBOARD -->
+<div class="box hidden" id="dashboard">
 
     <h1>🎮 Admin Dashboard</h1>
 
     <p class="info">
-      Add your game name, description, game link and thumbnail below.
+        Add your game name, description, game link and thumbnail below.
     </p>
 
-    <h2>Add a Game</h2>
+    <button id="logoutButton" class="logout">
+        Logout
+    </button>
 
+    <hr style="border-color:#333; margin:25px 0;">
+
+
+    <h2>Add a Game</h2>
 
     <!-- GAME NAME -->
     <label>Game Name</label>
 
     <input
-      id="gameName"
-      type="text"
-      placeholder="Example: Shadow Fight"
+        id="gameName"
+        type="text"
+        placeholder="Example: Shadow Fight"
     >
 
 
@@ -201,8 +220,8 @@
     <label>Description</label>
 
     <textarea
-      id="gameDescription"
-      placeholder="Short description of the game"
+        id="gameDescription"
+        placeholder="Short description of the game"
     ></textarea>
 
 
@@ -210,9 +229,9 @@
     <label>Game URL</label>
 
     <input
-      id="gameUrl"
-      type="url"
-      placeholder="https://example.com/game"
+        id="gameUrl"
+        type="url"
+        placeholder="https://example.com/game"
     >
 
 
@@ -220,686 +239,774 @@
     <label>Game Thumbnail</label>
 
     <input
-      id="gameImage"
-      type="file"
-      accept="image/png, image/jpeg, image/webp"
+        id="gameImage"
+        type="file"
+        accept="image/png, image/jpeg, image/webp"
     >
 
     <p class="info">
-      Recommended: JPG, PNG or WEBP. Maximum size: 2 MB.
+        Maximum original image size: 2 MB.
+        The image will automatically be compressed before being saved.
     </p>
+
 
     <!-- IMAGE PREVIEW -->
     <img
-      id="imagePreview"
-      class="image-preview"
-      alt="Game thumbnail preview"
+        id="imagePreview"
+        class="image-preview"
+        alt="Game thumbnail preview"
     >
 
 
-    <!-- ADD GAME BUTTON -->
+    <!-- ADD GAME -->
     <button id="addGameButton">
-      ➕ Add Game
+        ➕ Add Game
     </button>
 
     <div id="addMessage" class="message"></div>
 
-  </div>
+</div>
 
 
-  <!-- GAME LIST -->
-  <div class="box hidden" id="gamesBox">
+<!-- GAME LIST -->
+<div class="box hidden" id="gamesBox">
 
     <h2>📋 Games</h2>
 
     <div id="gameList"></div>
 
-  </div>
+</div>
 
 </div>
 
 
-<script>
+<script type="module">
 
 /*
- * =====================================
- * ADMIN SETTINGS
- * =====================================
- *
- * CHANGE THIS PASSWORD!
- *
- * IMPORTANT:
- * This is NOT a secure server-side
- * password because this website uses
- * only HTML/JavaScript.
- */
+====================================================
+FIREBASE CONFIG
+====================================================
 
-const ADMIN_PASSWORD = "CHANGE_THIS_PASSWORD";
+PASTE YOUR FIREBASE CONFIG HERE.
+
+Use the EXACT SAME CONFIG in index.html.
+====================================================
+*/
+
+const firebaseConfig = {
+    apiKey: "PASTE_YOUR_API_KEY_HERE",
+    authDomain: "PASTE_YOUR_AUTH_DOMAIN_HERE",
+    projectId: "PASTE_YOUR_PROJECT_ID_HERE",
+    storageBucket: "PASTE_YOUR_STORAGE_BUCKET_HERE",
+    messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
+    appId: "PASTE_YOUR_APP_ID_HERE"
+};
 
 
 /*
- * =====================================
- * ELEMENTS
- * =====================================
- */
+====================================================
+FIREBASE IMPORTS
+====================================================
+*/
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/*
+====================================================
+INITIALIZE FIREBASE
+====================================================
+*/
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/*
+====================================================
+ELEMENTS
+====================================================
+*/
 
 const loginBox =
-  document.getElementById("loginBox");
+    document.getElementById("loginBox");
 
 const dashboard =
-  document.getElementById("dashboard");
+    document.getElementById("dashboard");
 
 const gamesBox =
-  document.getElementById("gamesBox");
+    document.getElementById("gamesBox");
 
+const emailInput =
+    document.getElementById("emailInput");
 
 const passwordInput =
-  document.getElementById("passwordInput");
+    document.getElementById("passwordInput");
 
 const loginButton =
-  document.getElementById("loginButton");
+    document.getElementById("loginButton");
 
 const loginMessage =
-  document.getElementById("loginMessage");
+    document.getElementById("loginMessage");
 
+const logoutButton =
+    document.getElementById("logoutButton");
 
 const gameName =
-  document.getElementById("gameName");
+    document.getElementById("gameName");
 
 const gameDescription =
-  document.getElementById("gameDescription");
+    document.getElementById("gameDescription");
 
 const gameUrl =
-  document.getElementById("gameUrl");
+    document.getElementById("gameUrl");
 
 const gameImage =
-  document.getElementById("gameImage");
+    document.getElementById("gameImage");
 
 const imagePreview =
-  document.getElementById("imagePreview");
-
+    document.getElementById("imagePreview");
 
 const addGameButton =
-  document.getElementById("addGameButton");
+    document.getElementById("addGameButton");
 
 const addMessage =
-  document.getElementById("addMessage");
+    document.getElementById("addMessage");
 
 const gameList =
-  document.getElementById("gameList");
+    document.getElementById("gameList");
 
 
 /*
- * =====================================
- * STORAGE
- * =====================================
- */
+====================================================
+COMPRESS IMAGE
+====================================================
 
-const STORAGE_KEY = "sah_games";
+This keeps the thumbnail small enough to store
+inside Firestore.
+====================================================
+*/
 
+function compressImage(file) {
 
-function getGames() {
+    return new Promise((resolve, reject) => {
 
-  try {
+        const reader = new FileReader();
 
-    const saved =
-      localStorage.getItem(STORAGE_KEY);
+        reader.onload = function(event) {
 
-    if (!saved) {
-      return [];
-    }
+            const img = new Image();
 
-    const games =
-      JSON.parse(saved);
+            img.onload = function() {
 
-    return Array.isArray(games)
-      ? games
-      : [];
+                const maxWidth = 900;
 
-  } catch (error) {
+                let width = img.width;
+                let height = img.height;
 
-    console.error(
-      "Could not read games:",
-      error
-    );
+                if (width > maxWidth) {
 
-    return [];
+                    height =
+                        height * maxWidth / width;
 
-  }
+                    width = maxWidth;
+
+                }
+
+                const canvas =
+                    document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx =
+                    canvas.getContext("2d");
+
+                ctx.drawImage(
+                    img,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                const compressed =
+                    canvas.toDataURL(
+                        "image/jpeg",
+                        0.75
+                    );
+
+                resolve(compressed);
+
+            };
+
+            img.onerror = reject;
+
+            img.src = event.target.result;
+
+        };
+
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+
+    });
 
 }
 
 
-function saveGames(games) {
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(games)
-  );
-
-}
-
-
 /*
- * =====================================
- * IMAGE PREVIEW
- * =====================================
- */
+====================================================
+IMAGE PREVIEW
+====================================================
+*/
 
 gameImage.addEventListener(
-  "change",
-  function() {
+    "change",
+    function() {
 
-    const file =
-      gameImage.files[0];
+        const file =
+            gameImage.files[0];
 
-    if (!file) {
+        if (!file) {
 
-      imagePreview.style.display =
-        "none";
+            imagePreview.style.display = "none";
 
-      imagePreview.src = "";
+            imagePreview.src = "";
 
-      return;
+            return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+
+            addMessage.textContent =
+                "❌ Image must be smaller than 2 MB.";
+
+            gameImage.value = "";
+
+            imagePreview.style.display = "none";
+
+            return;
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function(event) {
+
+                imagePreview.src =
+                    event.target.result;
+
+                imagePreview.style.display =
+                    "block";
+
+            };
+
+        reader.readAsDataURL(file);
+
     }
-
-
-    /*
-     * Check file size
-     */
-
-    if (file.size > 2 * 1024 * 1024) {
-
-      addMessage.textContent =
-        "❌ Image must be smaller than 2 MB.";
-
-      gameImage.value = "";
-
-      imagePreview.style.display =
-        "none";
-
-      return;
-    }
-
-
-    /*
-     * Show preview
-     */
-
-    const reader =
-      new FileReader();
-
-
-    reader.onload =
-      function(event) {
-
-        imagePreview.src =
-          event.target.result;
-
-        imagePreview.style.display =
-          "block";
-
-      };
-
-
-    reader.readAsDataURL(file);
-
-  }
 );
 
 
 /*
- * =====================================
- * LOGIN
- * =====================================
- */
+====================================================
+LOGIN
+====================================================
+*/
 
-function login() {
+async function login() {
 
-  const password =
-    passwordInput.value;
+    const email =
+        emailInput.value.trim();
 
+    const password =
+        passwordInput.value;
 
-  if (password === ADMIN_PASSWORD) {
+    if (!email || !password) {
 
-    loginBox.classList.add("hidden");
+        loginMessage.textContent =
+            "❌ Enter your email and password.";
 
-    dashboard.classList.remove("hidden");
-
-    gamesBox.classList.remove("hidden");
-
-    loginMessage.textContent = "";
-
-    renderGames();
-
-  } else {
+        return;
+    }
 
     loginMessage.textContent =
-      "❌ Wrong password.";
+        "Logging in...";
 
-    passwordInput.value = "";
+    try {
 
-    passwordInput.focus();
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-  }
+        loginMessage.textContent = "";
+
+    } catch (error) {
+
+        console.error(error);
+
+        loginMessage.textContent =
+            "❌ Login failed. Check your email and password.";
+
+    }
 
 }
 
 
 loginButton.addEventListener(
-  "click",
-  login
+    "click",
+    login
 );
 
 
 passwordInput.addEventListener(
-  "keydown",
-  function(event) {
+    "keydown",
+    function(event) {
 
-    if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
-      login();
+            login();
+
+        }
 
     }
-
-  }
 );
 
 
 /*
- * =====================================
- * ADD GAME
- * =====================================
- */
+====================================================
+LOGOUT
+====================================================
+*/
 
-function addGame() {
+logoutButton.addEventListener(
+    "click",
+    async function() {
 
-  const name =
-    gameName.value.trim();
+        await signOut(auth);
 
-  const description =
-    gameDescription.value.trim();
-
-  const url =
-    gameUrl.value.trim();
-
-  const imageFile =
-    gameImage.files[0];
+    }
+);
 
 
-  /*
-   * Validate name and URL
-   */
+/*
+====================================================
+CHECK LOGIN
+====================================================
+*/
 
-  if (!name || !url) {
+onAuthStateChanged(
+    auth,
+    function(user) {
+
+        if (user) {
+
+            loginBox.classList.add("hidden");
+
+            dashboard.classList.remove("hidden");
+
+            gamesBox.classList.remove("hidden");
+
+            renderGames();
+
+        } else {
+
+            loginBox.classList.remove("hidden");
+
+            dashboard.classList.add("hidden");
+
+            gamesBox.classList.add("hidden");
+
+        }
+
+    }
+);
+
+
+/*
+====================================================
+ADD GAME
+====================================================
+*/
+
+async function addGame() {
+
+    const name =
+        gameName.value.trim();
+
+    const description =
+        gameDescription.value.trim();
+
+    const url =
+        gameUrl.value.trim();
+
+    const imageFile =
+        gameImage.files[0];
+
+
+    if (!name || !url) {
+
+        addMessage.textContent =
+            "❌ Please enter the game name and URL.";
+
+        return;
+
+    }
+
+
+    if (!/^https?:\/\//i.test(url)) {
+
+        addMessage.textContent =
+            "❌ URL must start with https:// or http://";
+
+        return;
+
+    }
+
+
+    if (!imageFile) {
+
+        addMessage.textContent =
+            "❌ Please select a game thumbnail.";
+
+        return;
+
+    }
+
+
+    if (imageFile.size > 2 * 1024 * 1024) {
+
+        addMessage.textContent =
+            "❌ Image must be smaller than 2 MB.";
+
+        return;
+
+    }
+
+
+    addGameButton.disabled = true;
 
     addMessage.textContent =
-      "❌ Please enter both the game name and URL.";
-
-    return;
-
-  }
+        "⏳ Uploading game information...";
 
 
-  /*
-   * Validate URL
-   */
+    try {
 
-  if (!/^https?:\/\//i.test(url)) {
+        /*
+         * Compress image
+         */
 
-    addMessage.textContent =
-      "❌ URL must start with https:// or http://";
-
-    return;
-
-  }
+        const imageData =
+            await compressImage(imageFile);
 
 
-  /*
-   * Require image
-   */
+        /*
+         * Save game to Firestore
+         */
 
-  if (!imageFile) {
-
-    addMessage.textContent =
-      "❌ Please select a game thumbnail.";
-
-    return;
-
-  }
-
-
-  /*
-   * Validate image size
-   */
-
-  if (imageFile.size > 2 * 1024 * 1024) {
-
-    addMessage.textContent =
-      "❌ Image must be smaller than 2 MB.";
-
-    return;
-
-  }
+        await addDoc(
+            collection(db, "games"),
+            {
+                name: name,
+                desc: description,
+                url: url,
+                image: imageData,
+                createdAt: Date.now()
+            }
+        );
 
 
-  /*
-   * Read image
-   */
+        /*
+         * Clear form
+         */
 
-  const reader =
-    new FileReader();
+        gameName.value = "";
 
+        gameDescription.value = "";
 
-  reader.onload =
-    function(event) {
+        gameUrl.value = "";
 
-      const games =
-        getGames();
+        gameImage.value = "";
 
+        imagePreview.src = "";
 
-      /*
-       * Create new game
-       */
-
-      const newGame = {
-
-        id: Date.now(),
-
-        name: name,
-
-        desc: description,
-
-        url: url,
-
-        image: event.target.result
-
-      };
+        imagePreview.style.display = "none";
 
 
-      games.push(newGame);
+        addMessage.textContent =
+            "✅ Game added successfully!";
 
 
-      /*
-       * Save game
-       */
+        renderGames();
 
-      try {
 
-        saveGames(games);
-
-      } catch (error) {
+    } catch (error) {
 
         console.error(error);
 
         addMessage.textContent =
-          "❌ Storage is full. Try a smaller image.";
-
-        return;
-
-      }
-
-
-      /*
-       * Clear form
-       */
-
-      gameName.value = "";
-
-      gameDescription.value = "";
-
-      gameUrl.value = "";
-
-      gameImage.value = "";
-
-
-      /*
-       * Clear preview
-       */
-
-      imagePreview.src = "";
-
-      imagePreview.style.display =
-        "none";
-
-
-      /*
-       * Success message
-       */
-
-      addMessage.textContent =
-        "✅ Game added successfully!";
-
-
-      /*
-       * Refresh game list
-       */
-
-      renderGames();
-
-    };
-
-
-  reader.readAsDataURL(imageFile);
-
-}
-
-
-addGameButton.addEventListener(
-  "click",
-  addGame
-);
-
-
-/*
- * =====================================
- * DELETE GAME
- * =====================================
- */
-
-function deleteGame(index) {
-
-  const games =
-    getGames();
-
-
-  if (
-    index < 0 ||
-    index >= games.length
-  ) {
-
-    return;
-
-  }
-
-
-  const game =
-    games[index];
-
-
-  const confirmed =
-    confirm(
-      'Delete "' +
-      game.name +
-      '"?'
-    );
-
-
-  if (!confirmed) {
-
-    return;
-
-  }
-
-
-  games.splice(
-    index,
-    1
-  );
-
-
-  saveGames(games);
-
-
-  renderGames();
-
-}
-
-
-/*
- * =====================================
- * DISPLAY GAMES
- * =====================================
- */
-
-function renderGames() {
-
-  const games =
-    getGames();
-
-
-  /*
-   * No games
-   */
-
-  if (games.length === 0) {
-
-    gameList.innerHTML =
-      "<p>No games added yet.</p>";
-
-    return;
-
-  }
-
-
-  /*
-   * Clear old list
-   */
-
-  gameList.innerHTML = "";
-
-
-  /*
-   * Display every game
-   */
-
-  games.forEach(
-    function(game, index) {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "item";
-
-
-      /*
-       * IMAGE
-       */
-
-      if (game.image) {
-
-        const image =
-          document.createElement("img");
-
-        image.className =
-          "game-image";
-
-        image.src =
-          game.image;
-
-        image.alt =
-          game.name;
-
-        item.appendChild(image);
-
-      }
-
-
-      /*
-       * NAME
-       */
-
-      const name =
-        document.createElement("div");
-
-      name.className =
-        "game-name";
-
-      name.textContent =
-        game.name;
-
-
-      /*
-       * DESCRIPTION
-       */
-
-      const description =
-        document.createElement("div");
-
-      description.className =
-        "game-description";
-
-      description.textContent =
-        game.desc ||
-        "No description";
-
-
-      /*
-       * URL
-       */
-
-      const url =
-        document.createElement("div");
-
-      url.className =
-        "game-url";
-
-      url.textContent =
-        game.url;
-
-
-      /*
-       * DELETE BUTTON
-       */
-
-      const deleteButton =
-        document.createElement("button");
-
-      deleteButton.className =
-        "danger";
-
-      deleteButton.textContent =
-        "🗑️ Delete";
-
-
-      deleteButton.addEventListener(
-        "click",
-        function() {
-
-          deleteGame(index);
-
-        }
-      );
-
-
-      /*
-       * Add everything
-       */
-
-      item.appendChild(name);
-
-      item.appendChild(description);
-
-      item.appendChild(url);
-
-      item.appendChild(deleteButton);
-
-
-      gameList.appendChild(item);
+            "❌ Could not add game. Check Firebase settings.";
 
     }
-  );
+
+
+    addGameButton.disabled = false;
+
+}
+
+
+/*
+====================================================
+DELETE GAME
+====================================================
+*/
+
+async function deleteGame(gameId, gameNameText) {
+
+    const confirmed =
+        confirm(
+            'Delete "' +
+            gameNameText +
+            '"?'
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        await deleteDoc(
+            doc(db, "games", gameId)
+        );
+
+        renderGames();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Could not delete the game."
+        );
+
+    }
+
+}
+
+
+/*
+====================================================
+LOAD GAMES
+====================================================
+*/
+
+async function renderGames() {
+
+    gameList.innerHTML =
+        "<p>Loading games...</p>";
+
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "games")
+            );
+
+
+        const games =
+            snapshot.docs.map(
+                function(item) {
+
+                    return {
+                        id: item.id,
+                        ...item.data()
+                    };
+
+                }
+            );
+
+
+        /*
+         * Newest first
+         */
+
+        games.sort(
+            function(a, b) {
+
+                return (
+                    (b.createdAt || 0) -
+                    (a.createdAt || 0)
+                );
+
+            }
+        );
+
+
+        if (games.length === 0) {
+
+            gameList.innerHTML =
+                "<p>No games added yet.</p>";
+
+            return;
+
+        }
+
+
+        gameList.innerHTML = "";
+
+
+        games.forEach(
+            function(game) {
+
+                const item =
+                    document.createElement("div");
+
+                item.className = "item";
+
+
+                /*
+                 * IMAGE
+                 */
+
+                if (game.image) {
+
+                    const image =
+                        document.createElement("img");
+
+                    image.className =
+                        "game-image";
+
+                    image.src =
+                        game.image;
+
+                    image.alt =
+                        game.name;
+
+                    item.appendChild(image);
+
+                }
+
+
+                /*
+                 * NAME
+                 */
+
+                const name =
+                    document.createElement("div");
+
+                name.className =
+                    "game-name";
+
+                name.textContent =
+                    game.name;
+
+
+                /*
+                 * DESCRIPTION
+                 */
+
+                const description =
+                    document.createElement("div");
+
+                description.className =
+                    "game-description";
+
+                description.textContent =
+                    game.desc ||
+                    "No description";
+
+
+                /*
+                 * URL
+                 */
+
+                const url =
+                    document.createElement("div");
+
+                url.className =
+                    "game-url";
+
+                url.textContent =
+                    game.url;
+
+
+                /*
+                 * DELETE
+                 */
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.className =
+                    "danger";
+
+                deleteButton.textContent =
+                    "🗑️ Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function() {
+
+                        deleteGame(
+                            game.id,
+                            game.name
+                        );
+
+                    }
+                );
+
+
+                item.appendChild(name);
+
+                item.appendChild(description);
+
+                item.appendChild(url);
+
+                item.appendChild(deleteButton);
+
+                gameList.appendChild(item);
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        gameList.innerHTML =
+            "<p>❌ Could not load games.</p>";
+
+    }
 
 }
 

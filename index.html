@@ -420,15 +420,27 @@ footer {
 <script type="module">
 
 
-/*
-====================================================
-FIREBASE CONFIG
-====================================================
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-PASTE THE SAME FIREBASE CONFIG HERE
-THAT YOU USED IN admin.html.
-====================================================
-*/
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBxQKD4WGRL_RLsm5yTA3wIK-x2hvukv_E",
+  authDomain: "shadow-anime-hindi.firebaseapp.com",
+  projectId: "shadow-anime-hindi",
+  storageBucket: "shadow-anime-hindi.firebasestorage.app",
+  messagingSenderId: "667892417939",
+  appId: "1:667892417939:web:fb2a5e7396ed156ed75466",
+  measurementId: "G-1GN6HE5CYMG"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const firebaseConfig = {
 
